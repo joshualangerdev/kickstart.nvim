@@ -49,3 +49,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- Nvim-Tree toggles
 vim.keymap.set('n', '<C-t>', '<cmd>NvimTreeToggle<CR>', { desc = 'nvimtree Toggle Window' })
 vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeFocus<CR>', { desc = 'nvimtree Focus Window' })
+
+-- Normal mode file operations
+vim.keymap.set('n', '<C-s>', '<cmd>w<CR>', { desc = 'Save file' })
+vim.keymap.set('n', '<C-c>', '<cmd>%y+<CR>', { desc = 'Copy whole file(yank)' })
