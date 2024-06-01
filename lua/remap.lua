@@ -45,3 +45,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
+
+-- Nvim-Tree toggles
+vim.keymap.set('n', '<C-t>', '<cmd>NvimTreeToggle<CR>', { desc = 'nvimtree Toggle Window' })
+vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeFocus<CR>', { desc = 'nvimtree Focus Window' })
