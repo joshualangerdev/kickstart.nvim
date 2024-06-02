@@ -19,13 +19,27 @@ return {
           },
         },
       },
-      'saadparwaiz1/cmp_luasnip',
 
-      -- Adds other completion capabilities.
-      --  nvim-cmp does not ship with all sources by default. They are split
-      --  into multiple repos for maintenance purposes.
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-path',
+      {
+        'windwp/nvim-autopairs',
+        opts = {
+          fast_wrap = {},
+          disable_filtype = { 'TelescopePrompt', 'vim' },
+        },
+        config = function(_, opts)
+          require('nvim-autopairs').setup(opts)
+
+          -- setup cmp for autopairs
+          local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
+          require('cmp').event:on('confirm_done', cmp_autopairs.on_confirm_done())
+        end,
+      },
+
+      {
+        'saadparwaiz1/cmp_luasnip',
+        'hrsh7th/cmp-nvim-lsp',
+        'hrsh7th/cmp-path',
+      },
     },
     config = function()
       -- See `:help cmp`
@@ -89,6 +103,11 @@ return {
               luasnip.jump(-1)
             end
           end, { 'i', 's' }),
+
+          ['<CR>'] = cmp.mapping.confirm {
+            behavior = cmp.ConfirmBehavior.Insert,
+            select = true,
+          },
 
           -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
